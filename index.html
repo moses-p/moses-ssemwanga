@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Moses Ssemwanga — Full-Stack Developer based in Kampala, Uganda. Building fast, secure, and content-rich websites for organisations across Africa.">
+<title>Moses Ssemwanga — Full-Stack Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#111;--ink2:#444;--ink3:#888;--surface:#fff;--surface2:#f5f4f0;
+    --accent:#1a5c3e;--accent-light:#e6f3ec;--border:rgba(0,0,0,0.10);
+    --serif:'DM Serif Display',serif;--sans:'DM Sans',sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--surface);color:var(--ink);line-height:1.6;font-size:16px}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border)}
+  .nav-logo{font-family:var(--serif);font-size:1.15rem;color:var(--ink);text-decoration:none}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-size:0.875rem;color:var(--ink2);text-decoration:none;letter-spacing:0.02em;transition:color 0.2s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-cta{background:var(--accent)!important;color:#fff!important;padding:0.45rem 1.25rem;border-radius:100px;font-size:0.85rem!important;transition:background 0.2s!important}
+  .nav-cta:hover{background:#133f2b!important}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;padding:8rem 2.5rem 5rem;max-width:1200px;margin:0 auto;gap:4rem}
+  .hero-text{flex:1}
+  .hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent-light);color:var(--accent);font-size:0.8rem;font-weight:500;padding:0.35rem 0.9rem;border-radius:100px;margin-bottom:1.5rem;letter-spacing:0.03em}
+  .hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+  h1.hero-title{font-family:var(--serif);font-size:clamp(2.6rem,5vw,4rem);line-height:1.08;margin-bottom:1.1rem}
+  h1.hero-title em{color:var(--accent);font-style:italic}
+  .hero-sub{font-size:1.05rem;color:var(--ink2);max-width:490px;margin-bottom:2rem;line-height:1.75;font-weight:300}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:#fff;padding:0.75rem 1.75rem;border-radius:100px;text-decoration:none;font-size:0.9rem;font-weight:500;transition:background 0.2s;display:inline-block}
+  .btn-primary:hover{background:#133f2b}
+  .btn-outline{border:1.5px solid rgba(0,0,0,0.15);color:var(--ink);padding:0.75rem 1.75rem;border-radius:100px;text-decoration:none;font-size:0.9rem;font-weight:500;transition:all 0.2s;display:inline-block}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+  .hero-visual{flex:0 0 370px}
+  .hero-card{background:var(--ink);border-radius:22px;padding:2rem;color:#fff;position:relative;overflow:hidden}
+  .hero-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:var(--accent);opacity:0.22}
+  .hero-card-label{font-size:0.68rem;letter-spacing:0.13em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1.25rem}
+  .stack-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-bottom:1.75rem}
+  .tag{background:rgba(255,255,255,0.09);border:0.5px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.82);font-size:0.73rem;padding:0.28rem 0.65rem;border-radius:100px}
+  .tag.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+  .stat{background:rgba(255,255,255,0.07);border-radius:12px;padding:0.9rem}
+  .stat-num{font-family:var(--serif);font-size:1.7rem;color:#fff;line-height:1}
+  .stat-lbl{font-size:0.7rem;color:rgba(255,255,255,0.45);margin-top:0.25rem}
+
+  /* SECTIONS */
+  section.inner{padding:5.5rem 2.5rem;max-width:1200px;margin:0 auto}
+  .section-eyebrow{font-size:0.72rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:0.75rem}
+  .section-title{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,2.7rem);color:var(--ink);margin-bottom:1rem;line-height:1.12}
+  .section-intro{color:var(--ink2);font-size:1rem;max-width:600px;font-weight:300;margin-bottom:3rem;line-height:1.75}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:start}
+  .about-text p{color:var(--ink2);line-height:1.85;margin-bottom:1rem;font-weight:300;font-size:0.95rem}
+  .certs{margin-top:1.5rem;display:flex;flex-direction:column;gap:0.55rem}
+  .cert{display:flex;align-items:flex-start;gap:0.75rem;font-size:0.85rem;color:var(--ink2);line-height:1.5}
+  .cert-dot{width:22px;height:22px;min-width:22px;background:var(--accent-light);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;margin-top:1px}
+  .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem}
+  .skill-item{background:var(--surface2);border-radius:10px;padding:0.9rem 1rem}
+  .skill-name{font-size:0.82rem;font-weight:500;color:var(--ink);margin-bottom:0.45rem}
+  .skill-bar{height:3px;background:rgba(0,0,0,0.07);border-radius:2px;overflow:hidden}
+  .skill-fill{height:100%;background:var(--accent);border-radius:2px}
+
+  /* PROJECTS */
+  .band{background:var(--surface2);margin:0;padding:5.5rem 2.5rem}
+  .band-inner{max-width:1200px;margin:0 auto}
+  .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  .project-card{border:0.5px solid var(--border);border-radius:18px;overflow:hidden;transition:transform 0.22s,box-shadow 0.22s;text-decoration:none;color:inherit;display:block;background:var(--surface)}
+  .project-card:hover{transform:translateY(-5px);box-shadow:0 24px 60px rgba(0,0,0,0.09)}
+  .project-thumb{height:160px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:1.1rem 1.25rem;position:relative;overflow:hidden}
+  .thumb-bg{position:absolute;inset:0;z-index:0}
+  .thumb-bg.green{background:linear-gradient(140deg,#0f3d29,#1a5c3e,#2d8a5e)}
+  .thumb-bg.amber{background:linear-gradient(140deg,#5a2d0c,#8a4a1a,#c4853a)}
+  .thumb-bg.navy{background:linear-gradient(140deg,#0d1b2a,#1b2d45,#2d4a6e)}
+  .thumb-bg.slate{background:linear-gradient(140deg,#1a1f2e,#2d3550,#424d6e)}
+  .thumb-bg.charcoal{background:linear-gradient(140deg,#1c1c1c,#2e2e2e,#464646)}
+  .thumb-bg.forest{background:linear-gradient(140deg,#1a3020,#2d5035,#3d6b4a)}
+  .thumb-emoji{font-size:2rem;z-index:1;margin-bottom:0.4rem}
+  .thumb-title{font-family:var(--serif);font-size:1rem;color:#fff;z-index:1;line-height:1.2}
+  .project-body{padding:1.1rem 1.25rem}
+  .project-type{font-size:0.66rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.3rem}
+  .project-name{font-weight:500;font-size:0.9rem;color:var(--ink);margin-bottom:0.45rem}
+  .project-desc{font-size:0.8rem;color:var(--ink2);line-height:1.6;margin-bottom:0.85rem;font-weight:300}
+  .project-tags{display:flex;flex-wrap:wrap;gap:0.3rem}
+  .ptag{background:var(--surface2);color:var(--ink2);font-size:0.68rem;padding:0.18rem 0.5rem;border-radius:100px}
+  .ptag.live{background:var(--accent-light);color:var(--accent);font-weight:500}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  .service-card{padding:1.5rem;border:0.5px solid var(--border);border-radius:14px;transition:border-color 0.2s,transform 0.2s}
+  .service-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .service-icon{font-size:1.5rem;margin-bottom:0.85rem}
+  .service-name{font-weight:500;font-size:0.93rem;color:var(--ink);margin-bottom:0.4rem}
+  .service-desc{font-size:0.82rem;color:var(--ink2);line-height:1.65;font-weight:300}
+
+  /* PROCESS */
+  .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;margin-top:1rem}
+  .process-steps::before{content:'';position:absolute;top:26px;left:calc(12.5% + 14px);right:calc(12.5% + 14px);height:1px;background:var(--border)}
+  .step{text-align:center;padding:1rem 0.5rem}
+  .step-num{width:52px;height:52px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.25rem;color:#fff;margin:0 auto 1rem}
+  .step-title{font-weight:500;font-size:0.875rem;color:var(--ink);margin-bottom:0.35rem}
+  .step-desc{font-size:0.78rem;color:var(--ink3);line-height:1.55}
+
+  /* CONTACT */
+  .contact-wrap{background:var(--ink);border-radius:24px;padding:3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .contact-title{font-family:var(--serif);font-size:2rem;color:#fff;margin-bottom:0.9rem;line-height:1.15}
+  .contact-sub{color:rgba(255,255,255,0.48);font-size:0.93rem;font-weight:300;margin-bottom:2rem;line-height:1.75}
+  .contact-links{display:flex;flex-direction:column;gap:0.75rem}
+  .contact-link{display:flex;align-items:center;gap:0.85rem;color:rgba(255,255,255,0.78);font-size:0.875rem;text-decoration:none;transition:color 0.2s}
+  .contact-link:hover{color:#fff}
+  .contact-link span{color:rgba(255,255,255,0.32);font-size:0.68rem;min-width:62px;letter-spacing:0.07em;text-transform:uppercase}
+  .contact-right{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);border-radius:14px;padding:1.75rem}
+  .contact-right p{color:rgba(255,255,255,0.58);font-size:0.875rem;margin-bottom:1.25rem;line-height:1.75;font-weight:300}
+
+  footer{text-align:center;padding:2rem 2.5rem;color:var(--ink3);font-size:0.78rem;border-top:0.5px solid var(--border)}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero{flex-direction:column;padding:7rem 1.5rem 4rem;gap:2.5rem}
+    .hero-visual{flex:none;width:100%}
+    .about-grid{grid-template-columns:1fr;gap:2rem}
+    .projects-grid{grid-template-columns:1fr 1fr}
+    .services-grid{grid-template-columns:1fr 1fr}
+    .contact-wrap{grid-template-columns:1fr;gap:2rem;padding:2.5rem}
+    nav{padding:1rem 1.5rem}
+    .nav-links{gap:1.25rem}
+  }
+  @media(max-width:600px){
+    .projects-grid{grid-template-columns:1fr}
+    .services-grid{grid-template-columns:1fr}
+    .skills-grid{grid-template-columns:1fr}
+    .process-steps{grid-template-columns:1fr 1fr}
+    .process-steps::before{display:none}
+    .hero-stats{grid-template-columns:1fr 1fr}
+    section.inner{padding:4rem 1.5rem}
+    .band{padding:4rem 1.5rem}
+    nav{padding:0.9rem 1rem}
+    .nav-links{gap:1rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">Moses Ssemwanga</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Available for projects &nbsp;·&nbsp; Kampala, Uganda</div>
+    <h1 class="hero-title">Full-Stack Developer &amp;<br><em>Digital Craftsman</em></h1>
+    <p class="hero-sub">I design and build fast, secure, and content-rich websites for organisations doing meaningful work — from first wireframe to post-launch support, across Africa and beyond.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">View my work</a>
+      <a href="#contact" class="btn-outline">Let's talk</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-card-label">Technical Stack</div>
+      <div class="stack-tags">
+        <span class="tag accent">React / Next.js</span>
+        <span class="tag">Node.js / NestJS</span>
+        <span class="tag">Django / FastAPI</span>
+        <span class="tag">WordPress</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Docker</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Tailwind CSS</span>
+        <span class="tag">GitHub Actions</span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">3+</div><div class="stat-lbl">Years experience</div></div>
+        <div class="stat"><div class="stat-num">6+</div><div class="stat-lbl">Live projects</div></div>
+        <div class="stat"><div class="stat-num">BSc</div><div class="stat-lbl">Makerere University</div></div>
+        <div class="stat"><div class="stat-num">CCNA</div><div class="stat-lbl">+ OCA certified</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="inner" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-eyebrow">About me</div>
+      <h2 class="section-title">Building digital infrastructure for impact</h2>
+      <p>I'm Moses Ssemwanga, a full-stack developer and IT Lead based in Kampala, Uganda. Currently heading all digital development at AIN Visibility Media, I specialise in building scalable, content-rich web platforms — from responsive frontends to secure, well-architected backends.</p>
+      <p>I've shipped live products across retail, education, media, and civic tech: a service marketplace (FixLinkUg), a school management system (EduTrack360), a cross-platform POS system, and multiple organisational websites — all designed with real users and long-term maintainability in mind.</p>
+      <p>I hold a BSc in Information Systems & Technology from Makerere University (2024), and certifications in CCNA, Oracle OCA, and an Advanced Diploma in Data Science with R.</p>
+      <div class="certs">
+        <div class="cert"><div class="cert-dot">✓</div>BSc Information Systems & Technology — Makerere University (2024)</div>
+        <div class="cert"><div class="cert-dot">✓</div>CCNA — Cisco Certified Network Associate (2023)</div>
+        <div class="cert"><div class="cert-dot">✓</div>Oracle Certified Associate (OCA) — Java SE Programmer</div>
+        <div class="cert"><div class="cert-dot">✓</div>Advanced Diploma in Data Science with R — Alison (2024)</div>
+      </div>
+    </div>
+    <div>
+      <div class="skills-grid">
+        <div class="skill-item"><div class="skill-name">React / Next.js</div><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+        <div class="skill-item"><div class="skill-name">Node.js / Express</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+        <div class="skill-item"><div class="skill-name">Django / FastAPI</div><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+        <div class="skill-item"><div class="skill-name">WordPress / CMS</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-item"><div class="skill-name">PostgreSQL / MongoDB</div><div class="skill-bar"><div class="skill-fill" style="width:87%"></div></div></div>
+        <div class="skill-item"><div class="skill-name">Docker / CI/CD</div><div class="skill-bar"><div class="skill-fill" style="width:83%"></div></div></div>
+        <div class="skill-item"><div class="skill-name">UI/UX Design & Figma</div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+        <div class="skill-item"><div class="skill-name">SEO & Analytics</div><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<div class="band" id="work">
+  <div class="band-inner">
+    <div class="section-eyebrow">Selected work</div>
+    <h2 class="section-title">Projects that deliver</h2>
+    <p class="section-intro">Real products, shipped and live — built with performance, security, and long-term maintainability in mind.</p>
+    <div class="projects-grid">
+
+      <a class="project-card" href="https://fixlink.ug" target="_blank" rel="noopener">
+        <div class="project-thumb">
+          <div class="thumb-bg forest"></div>
+          <div class="thumb-emoji">🔧</div>
+          <div class="thumb-title">FixLinkUg — Service Marketplace</div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">Full-Stack Web Application · Live</div>
+          <div class="project-name">fixlink.ug</div>
+          <div class="project-desc">A live service marketplace with client/provider dashboards, authentication, and secure payments. Redis-backed caching reduced dashboard load times by 70%.</div>
+          <div class="project-tags">
+            <span class="ptag live">🟢 Live</span>
+            <span class="ptag">Next.js</span><span class="ptag">TypeScript</span><span class="ptag">Flask</span><span class="ptag">PostgreSQL</span><span class="ptag">Redis</span><span class="ptag">Docker</span><span class="ptag">Nginx</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="thumb-bg amber"></div>
+          <div class="thumb-emoji">🏪</div>
+          <div class="thumb-title">POS System — Retail Platform</div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">Cross-Platform Desktop & PWA</div>
+          <div class="project-name">Offline-first Point of Sale System</div>
+          <div class="project-desc">End-to-end POS with online/offline capability, role-based access, real-time sales analytics, barcode scanning, and inventory management. Packaged as a cross-platform desktop app.</div>
+          <div class="project-tags">
+            <span class="ptag">Python / Flask</span><span class="ptag">PostgreSQL</span><span class="ptag">PWA</span><span class="ptag">Docker</span><span class="ptag">Gunicorn</span><span class="ptag">Nginx</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="thumb-bg navy"></div>
+          <div class="thumb-emoji">🎓</div>
+          <div class="thumb-title">EduTrack360 — School System</div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">Organisational Web Platform</div>
+          <div class="project-name">School Management & Analytics System</div>
+          <div class="project-desc">Scalable school management system with automated performance reporting, OCR-based digital mark entry, and real-time academic analytics — replacing manual data entry entirely.</div>
+          <div class="project-tags">
+            <span class="ptag">PHP / MySQL</span><span class="ptag">JavaScript</span><span class="ptag">Chart.js</span><span class="ptag">Git</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="thumb-bg slate"></div>
+          <div class="thumb-emoji">💼</div>
+          <div class="thumb-title">AQR-Web — Jobs Platform</div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">Full-Stack Web Platform</div>
+          <div class="project-name">Job Listings & Employer Dashboard</div>
+          <div class="project-desc">Full-stack job marketplace with listings, applications, and employer dashboards. Containerised with Docker and JWT authentication for secure multi-role access.</div>
+          <div class="project-tags">
+            <span class="ptag">Next.js</span><span class="ptag">FastAPI</span><span class="ptag">Docker</span><span class="ptag">SQLite</span><span class="ptag">Zustand</span><span class="ptag">GitHub Actions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="thumb-bg green"></div>
+          <div class="thumb-emoji">📡</div>
+          <div class="thumb-title">AIN Visibility Media</div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">Corporate Website & Media Platform</div>
+          <div class="project-name">AIN Media — Corporate Web Presence</div>
+          <div class="project-desc">Modern media company website with service showcase, portfolio, multimedia content, and contact system. Maintained as IT Lead with ongoing feature development and deployment management.</div>
+          <div class="project-tags">
+            <span class="ptag">React</span><span class="ptag">Tailwind CSS</span><span class="ptag">Node.js</span><span class="ptag">MongoDB</span><span class="ptag">Figma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="thumb-bg charcoal"></div>
+          <div class="thumb-emoji">⛪</div>
+          <div class="thumb-title">St. Rachael Church Website</div>
+        </div>
+        <div class="project-body">
+          <div class="project-type">Organisational Website</div>
+          <div class="project-name">Church Web Platform with CMS</div>
+          <div class="project-desc">Fully responsive church website with animated transitions, newsletter signup, ministry pages, and event management — deployed on Vercel with a smooth CMS experience for non-technical staff.</div>
+          <div class="project-tags">
+            <span class="ptag">Next.js</span><span class="ptag">React</span><span class="ptag">Tailwind CSS</span><span class="ptag">Vercel</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="inner" id="services">
+  <div class="section-eyebrow">What I offer</div>
+  <h2 class="section-title">End-to-end web development</h2>
+  <p class="section-intro">The full scope of capabilities — from first wireframe to post-launch support.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <div class="service-name">UX/UI Design & Prototyping</div>
+      <div class="service-desc">Wireframes, interactive prototypes, and responsive mobile-first designs in Figma that reflect your brand — reviewed and approved before a single line of code is written.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚙️</div>
+      <div class="service-name">Full-Stack Development</div>
+      <div class="service-desc">Scalable architecture using React, Next.js, Django, FastAPI, and Node.js — with clean RESTful APIs, JWT authentication, and Docker-based deployment.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📝</div>
+      <div class="service-name">CMS Integration & Training</div>
+      <div class="service-desc">WordPress, Webflow, or custom CMS setup with structured templates — plus hands-on staff training so your team manages content independently.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔒</div>
+      <div class="service-name">Security & Performance</div>
+      <div class="service-desc">SSL, secure authentication, Nginx configuration, speed optimisation, cross-browser and cross-device testing, and data protection compliance built in from day one.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📈</div>
+      <div class="service-name">Analytics, SEO & Reporting</div>
+      <div class="service-desc">Google Analytics integration, custom dashboards, and on-page SEO — giving you real visibility into how your audience finds and uses your platform.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛠️</div>
+      <div class="service-name">Maintenance & Support</div>
+      <div class="service-desc">Post-launch bug fixing, uptime monitoring, performance tuning, and ongoing feature development — with CI/CD pipelines to keep deployments smooth.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div class="band">
+  <div class="band-inner">
+    <div class="section-eyebrow">How I work</div>
+    <h2 class="section-title">A clear, collaborative process</h2>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Discovery</div>
+        <div class="step-desc">Understanding your goals, audience, brand, and content needs through close collaboration</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Design</div>
+        <div class="step-desc">Wireframes and interactive prototypes reviewed and approved before development begins</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Build & Test</div>
+        <div class="step-desc">Iterative development with UAT, bug fixing, cross-device testing, and regular check-ins</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Launch & Support</div>
+        <div class="step-desc">Deployment, CMS training, analytics setup, and ongoing post-launch technical support</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="inner" id="contact">
+  <div class="contact-wrap">
+    <div>
+      <h2 class="contact-title">Let's build something meaningful together.</h2>
+      <p class="contact-sub">Open to project-based engagements. Based in Kampala, Uganda — working across East Africa and remotely.</p>
+      <div class="contact-links">
+        <a href="mailto:mosesharuna407@gmail.com" class="contact-link">
+          <span>Email</span>mosesharuna407@gmail.com
+        </a>
+        <a href="tel:+256782068131" class="contact-link">
+          <span>Phone</span>+256 782 068 131
+        </a>
+        <a href="https://github.com/moses-p" target="_blank" rel="noopener" class="contact-link">
+          <span>GitHub</span>github.com/moses-p
+        </a>
+        <a href="https://www.linkedin.com/in/ssemwanga-haruna-519653266" target="_blank" rel="noopener" class="contact-link">
+          <span>LinkedIn</span>ssemwanga-haruna-519653266
+        </a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <p>Applying for the Pollicy Website Developer role. My experience building research platforms, CMS-driven organisational sites, and full-stack applications — including a live marketplace and multiple deployed websites — maps directly to your scope of work.</p>
+      <a href="mailto:info@pollicy.org?subject=Website Developer — Application by Moses Ssemwanga&body=Dear Pollicy team,%0A%0APlease find attached my CV and financial proposal for the Website Developer role.%0A%0APortfolio: [add-your-live-url-here]%0A%0AKind regards,%0AMoses Ssemwanga%0A+256 782 068 131" class="btn-primary">Apply to Pollicy &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Moses Ssemwanga &nbsp;·&nbsp; Full-Stack Developer &nbsp;·&nbsp; Kampala, Uganda &nbsp;·&nbsp; mosesharuna407@gmail.com</p>
+</footer>
+
+</body>
+</html>
